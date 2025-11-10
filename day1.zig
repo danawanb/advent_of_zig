@@ -2,12 +2,13 @@ const std = @import("std");
 const fs = std.fs;
 const maxInt = std.math.maxInt;
 
-fn parseU64(buf: []const u8, radix: u8) !u64 {
+pub fn parseU64(buf: []const u8, radix: u8) !u64 {
     var x: u64 = 0;
     for (buf) |c| {
         const digit = charToDigit(c);
         if (digit >= radix) {
-            return error.InvalidChar;
+            //std.debug.print("digit {d} || \n", .{digit});
+            break;
         }
 
         var ov = @mulWithOverflow(x, radix);
